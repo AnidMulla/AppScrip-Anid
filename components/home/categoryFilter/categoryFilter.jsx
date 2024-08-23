@@ -27,21 +27,29 @@ const CategoryFilter = () => {
 
   const getFilteredProduct = async (selectedCategory) => {
     if (selectedCategory && selectedCategory !== "all") {
-      fetch(`https://fakestoreapi.com/products/category/${selectedCategory}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setFilteredProducts((prev) => [...prev, ...data]);
-        });
+      try {
+        const response = await fetch(
+          `https://fakestoreapi.com/products/category/${selectedCategory}`
+        );
+        const data = await response.json();
+        setFilteredProducts((prev) => [...prev, ...data]);
+      } catch (error) {
+        console.error("Error fetching filtered products:", error);
+      }
     } else if (selectedCategory === "all") {
-      setFilteredProducts([]);
-      const data = await fetchAllProducts();
-      setProducts(data);
-      setCategories({
-        menClothing: true,
-        womensClothing: true,
-        jewelery: true,
-        electronics: true,
-      });
+      try {
+        setFilteredProducts([]);
+        const data = await fetchAllProducts();
+        setProducts(data);
+        setCategories({
+          menClothing: true,
+          womensClothing: true,
+          jewelery: true,
+          electronics: true,
+        });
+      } catch (error) {
+        console.error("Error fetching all products:", error);
+      }
     }
   };
 
@@ -175,7 +183,6 @@ const CategoryFilter = () => {
                   all: !categories.all,
                 });
                 if (!categories.all) {
-                  // handleCategoryChange("");
                 } else {
                   handleCategoryChange("all");
                 }
@@ -194,7 +201,6 @@ const CategoryFilter = () => {
                     electronics: !categories.electronics,
                   });
                   if (!categories.electronics) {
-                    // handleCategoryChange("");
                   } else {
                     handleCategoryChange("electronics");
                   }
@@ -213,7 +219,6 @@ const CategoryFilter = () => {
                     jewelery: !categories.jewelery,
                   });
                   if (!categories.jewelery) {
-                    // handleCategoryChange("");
                   } else {
                     handleCategoryChange("jewelery");
                   }
