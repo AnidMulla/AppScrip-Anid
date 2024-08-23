@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./recommended.css";
 import { RiArrowDownWideFill, RiArrowUpWideFill } from "react-icons/ri";
 import { useProducts } from "@/contexts/ProductsDataProvider";
-import { fetchAllProducts } from "@/apis/productsApi";
+import { fetchAllProducts } from "@/apis/Api";
 import { IoCheckmarkSharp } from "react-icons/io5";
 
 const Recommended = () => {

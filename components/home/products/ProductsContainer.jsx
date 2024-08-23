@@ -1,5 +1,5 @@
 "use client";
-import { fetchAllProducts } from "@/apis/productsApi";
+import { fetchAllProducts } from "@/apis/Api";
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import "./products.css";

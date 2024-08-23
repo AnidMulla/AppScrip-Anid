@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./categoryFilter.css";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import { useProducts } from "@/contexts/ProductsDataProvider";
-import { fetchAllProducts } from "@/apis/productsApi";
+import { fetchAllProducts } from "@/apis/Api";
 
 const CategoryFilter = () => {
   const [showIdealCategories, setShowIdealCategories] = useState(true);
