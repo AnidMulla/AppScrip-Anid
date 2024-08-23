@@ -5,6 +5,6 @@ export async function fetchAllProducts() {
     const data = response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    error;
   }
 }

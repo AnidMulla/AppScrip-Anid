@@ -16,12 +16,12 @@ const ProductsContainer = () => {
   const getProducts = async () => {
     setisLoading(true);
     const data = await fetchAllProducts();
-    console.log(data);
+    data;
     setProducts(data);
     setisLoading(false);
   };
 
-  console.log("filteredProducts", filteredProducts);
+  "filteredProducts", filteredProducts;
 
   return (
     <div className="products_container">

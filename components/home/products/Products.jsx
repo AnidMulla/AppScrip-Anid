@@ -17,7 +17,7 @@ const products = () => {
   const [showFilter, setShowFilter] = useState(true);
   const [showMobileFilter, setShowMobileFilter] = useState(false);
 
-  console.log("click", showMobileFilter);
+  "click", showMobileFilter;
 
   return (
     <div>

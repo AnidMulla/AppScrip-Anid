@@ -23,7 +23,7 @@ const Recommended = () => {
     const productsFromAPI = await fetchAllProducts();
     const sortedProducts = sortProductsByRating(productsFromAPI, item);
 
-    console.log("sortedProducts", sortedProducts);
+    "sortedProducts", sortedProducts;
 
     setProducts(sortedProducts);
     setShowDropdown(false);
