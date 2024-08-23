@@ -1,0 +1,35 @@
+nav {
+  margin: 10px 0;
+}
+.nav_left {
+  display: flex;
+  align-items: center;
+}
+.nav_list {
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+  .nav_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    gap: 50px;
+    margin-bottom: 20px;
+    margin-top: 50px;
+  }
+  .nav_item {
+    text-decoration: none;
+    color: #252020;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 20px;
+  }
+  .nav_item:hover {
+    border-bottom: 1px solid #252020;
+  }
+  .activeLink {
+    color: #9867c5;
+  }
+}

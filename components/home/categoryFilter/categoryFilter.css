@@ -1,0 +1,84 @@
+.category_filter_section {
+  display: block;
+  min-width: 70vw;
+  text-align: left;
+  padding: 20px;
+}
+
+.ideal_categories_button,
+.other_categories_button {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  gap: 10px;
+  width: 100%;
+}
+
+.ideal_categories_button > h3,
+.other_categories_button > h3 {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.select_all_button {
+  cursor: pointer;
+  margin: 10px 0;
+  background-color: inherit;
+  border: none;
+  font-size: 16px;
+}
+
+.unselect_button {
+  width: 8rem;
+  background-color: inherit;
+  border: none;
+  text-decoration: underline;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.men_category,
+.women_category,
+.electronics_category,
+.jewellery_category {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+}
+
+.men_category input[type="checkbox"],
+.women_category input[type="checkbox"],
+.electronics_category input[type="checkbox"],
+.jewellery_category input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.different_categories {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (min-width: 600px) {
+  .category_filter_section {
+    min-width: 20rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .ideal_categories_button,
+  .other_categories_button {
+    justify-content: space-between;
+  }
+  .category_filter_section {
+    min-width: 250px;
+    padding: 20px;
+  }
+}
