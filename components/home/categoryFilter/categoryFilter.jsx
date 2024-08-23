@@ -26,7 +26,6 @@ const CategoryFilter = () => {
   }, [selectedCategory]);
 
   const getFilteredProduct = async (selectedCategory) => {
-    let filteredProducts = [];
     if (selectedCategory && selectedCategory !== "all") {
       fetch(`https://fakestoreapi.com/products/category/${selectedCategory}`)
         .then((response) => response.json())
