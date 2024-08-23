@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./recommended.css";
 import { RiArrowDownWideFill, RiArrowUpWideFill } from "react-icons/ri";
 import { useProducts } from "@/contexts/ProductsDataProvider";
@@ -7,72 +7,74 @@ import { fetchAllProducts } from "@/apis/productsApi";
 import { IoCheckmarkSharp } from "react-icons/io5";
 
 const Recommended = () => {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [activeSortItem, setActiveSortItem] = useState("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedSortOption, setSelectedSortOption] = useState("");
 
   const { setProducts } = useProducts();
 
-  function sortProductsByRating(products, item) {
-    if (item === "rating")
-      return products.sort((a, b) => b.rating.rate - a.rating.rate);
-    else if (item === "desc") return products.sort((a, b) => b.price - a.price);
-    else if (item === "asc") return products.sort((a, b) => a.price - b.price);
-  }
+  const sortProducts = (products, sortOption) => {
+    switch (sortOption) {
+      case "rating":
+        return [...products].sort((a, b) => b.rating.rate - a.rating.rate);
+      case "desc":
+        return [...products].sort((a, b) => b.price - a.price);
+      case "asc":
+        return [...products].sort((a, b) => a.price - b.price);
+      default:
+        return products;
+    }
+  };
 
-  async function sort(item) {
-    const productsFromAPI = await fetchAllProducts();
-    const sortedProducts = sortProductsByRating(productsFromAPI, item);
-
-    "sortedProducts", sortedProducts;
-
-    setProducts(sortedProducts);
-    setShowDropdown(false);
-  }
+  const handleSort = async (sortOption) => {
+    try {
+      const products = await fetchAllProducts();
+      const sortedProducts = sortProducts(products, sortOption);
+      setProducts(sortedProducts);
+      setSelectedSortOption(sortOption);
+      setIsDropdownOpen(false);
+    } catch (error) {
+      console.error("Failed to fetch and sort products:", error);
+    }
+  };
 
   return (
-    <div className="dropdown_container ">
-      {/* DROPDONW BUTTON */}
+    <div className="dropdown-container">
+      {/* Dropdown Button */}
       <button
-        className="recommended_btn"
-        onClick={() => setShowDropdown(!showDropdown)}
+        className="recommended-button"
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <p>Recommended</p>
-        {showDropdown ? <RiArrowUpWideFill /> : <RiArrowDownWideFill />}
+        {isDropdownOpen ? <RiArrowUpWideFill /> : <RiArrowDownWideFill />}
       </button>
 
-      {/* DROPDOWN LISTS */}
-      {showDropdown && (
-        <div className="dropdown_list_container">
-          <ul className="dropdown_list">
+      {/* Dropdown List */}
+      {isDropdownOpen && (
+        <div className="dropdown-list-container">
+          <ul className="dropdown-list">
             <li
-              onClick={() => {
-                sort("rating");
-                setActiveSortItem("rating");
-              }}
+              onClick={() => handleSort("rating")}
+              className={selectedSortOption === "rating" ? "active" : ""}
             >
-              {activeSortItem === "rating" && (
+              {selectedSortOption === "rating" && (
                 <IoCheckmarkSharp color="green" size={20} />
               )}
               <span>POPULAR</span>
             </li>
             <li
-              onClick={() => {
-                sort("desc");
-                setActiveSortItem("desc");
-              }}
+              onClick={() => handleSort("desc")}
+              className={selectedSortOption === "desc" ? "active" : ""}
             >
-              {activeSortItem === "desc" && (
+              {selectedSortOption === "desc" && (
                 <IoCheckmarkSharp color="green" size={20} />
               )}
               <span>PRICE: HIGH TO LOW</span>
             </li>
             <li
-              onClick={() => {
-                sort("asc");
-                setActiveSortItem("asc");
-              }}
+              onClick={() => handleSort("asc")}
+              className={selectedSortOption === "asc" ? "active" : ""}
             >
-              {activeSortItem === "asc" && (
+              {selectedSortOption === "asc" && (
                 <IoCheckmarkSharp color="green" size={20} />
               )}
               <span>PRICE: LOW TO HIGH</span>
